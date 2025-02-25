@@ -1,0 +1,10 @@
+namn = input("Vad heter du?")
+print("Hej", namn, "!")
+favoritefärg = input("Vad är din favoritefärg?")
+print("din favoritefärg är", favoritefärg, ".")
+print("Vilken fin favoritefärg", namn)
+mat = input("Vilken typ av mat gillar du?")
+print(namn, mat, "låter förfärligt", ".")
+pengar = input("Hur mycket pengar har du på kontot?")
+print(namn, "du är ju nästan miljonär!")
+ 
