@@ -27,7 +27,6 @@ font = pygame.font.Font(None, 36)
 text = font.render('Casper', True, BLACK, WHITE)
 textRect = text.get_rect()
 textRect.center = (85 // 2, 30 // 2)
-text1 = font.render('Röd', True, BLACK, (255,0,0))
  
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
