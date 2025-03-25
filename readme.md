@@ -1,5 +1,14 @@
 # Casper Larsson Loggbok
 =======================
+## 3-25-25
+Idag så har jag fixat så att min snake inte rör sig när jag inte trycker på vänster eller höger knapparna. Jag har även stött på ett problem med mina fallande plommon. Dom kan i vissa fall försvinna utan att ha fallit hela vägen ner eller blivit ätna av ormen. Försöker lista ut vad felet är men har inte hittat det än.
+
+## 10-15-24
+Idag gjorde jag test 2 och klarade det. Innan provet så tränade jag inför test 2.
+
+## 10-14-24
+Idag tränade jag inför test 2. Provet inehåller if och while slingor. 
+
 ## 10-08-24
 Idag har jag börjat och gkort färdogt uppgift 1 7070 slumptal och spel.
 
