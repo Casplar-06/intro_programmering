@@ -1,15 +1,3 @@
-'''
-Uses dictionary insted of list to store each plum.
-
-
-Tasks
-
-1. Make the snake move properly.
-2. Add score. Display the score on the screen.
-3. Add an other fruit, that will kill the snake.
-
-'''
- 
 import pygame
 import random
 
@@ -31,7 +19,10 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Snake Game")
 
 # Load images
-snake_image = pygame.image.load("my_awsome_game/img/snake.png")
+snake_image_right = pygame.image.load("my_awsome_game/img/snake.png")
+snake_image_left = pygame.transform.flip(snake_image_right, True, False)
+
+snake_image = snake_image_right  # Start facing right
 snake_x, snake_y = 200, 400
 snake_radius = (snake_image.get_width() + snake_image.get_height()) / 4
 
@@ -45,6 +36,7 @@ cherries_radius = (cherries_image.get_width() + cherries_image.get_height()) / 4
 snake_speed = 5
 snake_dx, snake_dy = 0, 0
 score = 0
+direction = "right"
 
 plums = {}
 cherries = {}
@@ -62,32 +54,43 @@ while is_running:
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         snake_dx, snake_dy = -snake_speed, 0
+        direction = "left"
     elif keys[pygame.K_RIGHT]:
         snake_dx, snake_dy = snake_speed, 0
-    elif keys[pygame.K_UP]:
-        snake_dx, snake_dy = 0, -snake_speed
-    elif keys[pygame.K_DOWN]:
-        snake_dx, snake_dy = 0, snake_speed
+        direction = "right"
     else:
         snake_dx, snake_dy = 0, 0
-    
+
+    # Update snake position
     snake_x += snake_dx
     snake_y += snake_dy
-    
-    # Wrap the snake around the screen
-    snake_x %= 400
-    snake_y %= 500
+
+    # Wrap around screen edges
+    if snake_x > 400:
+        snake_x = 0
+    elif snake_x < 0:
+        snake_x = 400
+    if snake_y > 500:
+        snake_y = 0
+    elif snake_y < 0:
+        snake_y = 500
+
+    # Update image direction
+    if direction == "left":
+        snake_image = snake_image_left
+    elif direction == "right":
+        snake_image = snake_image_right
 
     # Spawn plums
     if random.randint(0, 100) < 2:
         plum_id = len(plums)
         plums[plum_id] = {"x": random.randint(0, 400), "y": 0, "speed": 1}
-    
+
     # Spawn deadly fruit
     if random.randint(0, 200) < 1:
         fruit_id = len(cherries)
         cherries[fruit_id] = {"x": random.randint(0, 400), "y": 0, "speed": 1}
-    
+
     # Move plums
     to_remove = []
     for plum_id, plum in plums.items():
@@ -100,7 +103,7 @@ while is_running:
             score += 1
     for plum_id in to_remove:
         del plums[plum_id]
-    
+
     # Move deadly fruits
     to_remove = []
     for fruit_id, fruit in cherries.items():
@@ -113,7 +116,7 @@ while is_running:
             is_running = False
     for fruit_id in to_remove:
         del cherries[fruit_id]
-    
+
     # Drawing
     screen.fill(GREEN)
     screen.blit(snake_image, (snake_x, snake_y))
@@ -121,12 +124,12 @@ while is_running:
         screen.blit(plum_image, (plum["x"], plum["y"]))
     for fruit in cherries.values():
         screen.blit(cherries_image, (fruit["x"], fruit["y"]))
-    
+
     # Display score
     font = pygame.font.Font(None, 36)
     score_text = font.render(f"Score: {score}", True, WHITE)
     screen.blit(score_text, (10, 10))
-    
+
     pygame.display.flip()
     clock.tick(60)
 
