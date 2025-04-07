@@ -1,3 +1,14 @@
+'''
+Tasks:
+1. Make it possible for the snake to move right.
+2. Flip the snake image in the diraction it is moving.
+3. When the snake moves off the screen to the right, make it reappear on the left side of the screen.
+4. Add score. Display the score on the screen.
+5. Add an other fruit, that will kill the snake.
+'''
+
+
+
 import pygame
 import random
 
@@ -82,7 +93,7 @@ while is_running:
         snake_image = snake_image_right
 
     # Spawn plums
-    if random.randint(0, 100) < 2:
+    if random.randint(0, 200) < 1:
         plum_id = len(plums)
         plums[plum_id] = {"x": random.randint(0, 400), "y": 0, "speed": 1}
 
